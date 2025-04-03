@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Tumor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    transition: background 0.3s, color 0.3s;
+}
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    text-align: center;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #007bff;
+    color: white;
+    padding: 15px;
+    border-radius: 10px 10px 0 0;
+}
+.upload-section {
+    margin: 20px 0;
+}
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 15px;
+    cursor: pointer;
+    background: #007bff;
+    color: white;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+.custom-file-upload:hover {
+    background: #0056b3;
+}
+input[type="file"] {
+    display: none;
+}
+#preview-container {
+    margin: 20px 0;
+}
+#preview {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+#predictButton {
+    background: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+#predictButton:hover {
+    background: #218838;
+}
+#loading {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #007bff;
+}
+.buttons {
+    margin-top: 20px;
+}
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    text-decoration: none;
+    color: white;
+    background: #007bff;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+.btn:hover {
+    background: #0056b3;
+}
+#toggleMode {
+    padding: 5px 10px;
+    background: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.dark-mode {
+    background: #222;
+    color: white;
+}
+.dark-mode .container {
+    background: #333;
+    color: white;
+}
+
+</style>
+<script language="javascript">
+   
+
+function previewImage(event) {
+    let reader = new FileReader();
+    reader.onload = function () {
+        let output = document.getElementById("preview");
+        output.src = reader.result;
+        output.style.display = "block";
+    };
+    reader.readAsDataURL(event.target.files[0]);
+}
+
+document.getElementById("uploadForm").addEventListener("submit", function () {
+    document.getElementById("predictButton").style.display = "none";
+    document.getElementById("loading").style.display = "block";
+});
+
+</script>
+<body>
+    <div class="container">
+        <nav>
+            <h2>Brain Tumor Detection</h2>
+           
+        </nav>
+
+        <section class="upload-section">
+            <h1>Upload MRI Image for Prediction</h1>
+            <form id="uploadForm" action="/predict" method="post" enctype="multipart/form-data">
+                <label for="file" class="custom-file-upload">📁 Choose Image</label>
+                <input type="file" name="file" id="file" accept="image/*" onchange="previewImage(event)">
+                <center>
+                <div id="preview-container">
+                    <img id="preview" src="#" alt="Image Preview" style="display:none;">
+                </div>
+                </center>
+                <button type="submit" id="predictButton">🔍 Predict</button>
+                <div id="loading" style="display: none;">🔄 Predicting...</div>
+            </form>
+        </section>
+
+        
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

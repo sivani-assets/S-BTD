@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    transition: background 0.3s, color 0.3s;
+}
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    text-align: center;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #007bff;
+    color: white;
+    padding: 15px;
+    border-radius: 10px 10px 0 0;
+}
+.result-section {
+    margin: 20px 0;
+}
+.image-container {
+    margin: 20px auto;
+    text-align: center;
+}
+.preview-img {
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border: 2px solid #007bff;
+    padding: 5px;
+}
+.result-text {
+    font-size: 22px;
+    font-weight: bold;
+}
+.result-text span {
+    color: #d9534f;
+}
+.buttons {
+    margin-top: 20px;
+}
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    margin: 5px;
+    text-decoration: none;
+    color: white;
+    background: #007bff;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+.btn:hover {
+    background: #0056b3;
+}
+.download-btn {
+    background: #28a745;
+}
+.download-btn:hover {
+    background: #218838;
+}
+#toggleMode {
+    padding: 5px 10px;
+    background: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.dark-mode {
+    background: #222;
+    color: white;
+}
+.dark-mode .container {
+    background: #333;
+    color: white;
+}
+
+</style>
+<script language="javascript">
+    
+
+document.getElementById("downloadReport").addEventListener("click", function () {
+    fetch('/generate_report', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ filename: "{{ filename }}", result: "{{ result }}" })
+    })
+    .then(response => response.blob())
+    .then(blob => {
+        let link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'BrainTumor_Report.pdf';
+        link.click();
+    })
+    .catch(error => console.error("Error generating report:", error));
+});
+
+document.getElementById("downloadReport").addEventListener("click", function () {
+    fetch('/report_form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ filename: "{{ filename }}", result: "{{ result }}" })
+    })
+    .then(response => response.blob())
+    .then(blob => {
+        let link = document.createElement('a');
+        link.href = window.URL.createObjectURL(blob);
+        link.download = 'BrainTumor_Report.pdf';
+        link.click();
+    })
+    .catch(error => console.error("Error generating report:", error));
+});
+
+</script>
+<body>
+    <div class="container">
+        <h1>Prediction Result</h1>
+        <p>Uploaded MRI Scan:</p>
+        <img src="{{ url_for('static', filename='uploads/' + filename) }}" width="300">
+
+        <h2>Diagnosis Result: {{ result }}</h2>
+
+        <a href="{{ url_for('report_form', filename=filename, result=result) }}" class="btn">Generate Report</a>
+        <a href="/predict" class="btn">Try Another Image</a>
+    </div>
+</body>
+</html>
+

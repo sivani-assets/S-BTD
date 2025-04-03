@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How CNN Works</title>
+    <link rel="stylesheet" href="static/css/style.css">
+    <style>
+        .cnn-container {
+            text-align: center;
+            padding: 20px;
+        }
+        .cnn-animation {
+            width: 80%;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .layer {
+            width: 130px;
+            height: 130px;
+            background: linear-gradient(to right, #007bff, #00d4ff);
+            border-radius: 10px;
+            text-align: center;
+            line-height: 100px;
+            font-weight: bold;
+            color: white;
+            animation: fadeIn 2s infinite alternate;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0.3;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .cnn-diagram {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+        }
+        .cnn-diagram img {
+            width: 80%;
+            max-width: 800px;
+        }
+    </style>
+</head>
+<body >
+    
+    <main class="cnn-container">
+        <h1>How Convolutional Neural Networks (CNN) Work</h1>
+        <p>CNNs are designed to automatically learn spatial hierarchies of features through convolutional layers.</p>
+        <br><br>
+        <div class="cnn-animation">
+            <div class="layer" style="animation-delay: 0s;">Input</div>
+            <div class="layer" style="animation-delay: 0.5s;">Conv Layer</div>
+            <div class="layer" style="animation-delay: 1s;">Pooling</div>
+            <div class="layer" style="animation-delay: 1.5s;">Fully Connected</div>
+            <div class="layer" style="animation-delay: 2s;">Output</div>
+        </div>
+        <br><br><br>
+        <div class="cnn-diagram">
+            <img src="{{ url_for('static', filename='images/CNN.png') }}" alt="CNN Diagram">
+        </div>
+    </main>
+</body>
+</html>

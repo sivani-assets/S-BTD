@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - Brain Tumor Detection</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        h3 {
+            color: #34495e;
+            margin-top: 25px;
+        }
+        ul {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+            color: #333;
+        }
+        .step {
+            background: #ecf0f3;
+            border-left: 5px solid #3498db;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        .footer-note {
+            margin-top: 40px;
+            font-style: italic;
+            text-align: center;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💡 How the Brain Tumor Detection System Works</h1>
+
+        <p>Your project is a complete <strong>AI-powered web-based diagnostic system</strong> that helps detect brain tumors from MRI images using <strong>Convolutional Neural Networks (CNN)</strong> and presents the results in a user-friendly format using <strong>Flask web framework</strong>. Here's a step-by-step explanation of how it works:</p>
+
+        <div class="step">
+            <h3>🔶 1. User Interface for MRI Image Upload (Flask Web Application)</h3>
+            <ul>
+                <li>The system starts with a simple web interface where the user (doctor or technician) uploads an MRI brain image.</li>
+                <li>This image is stored in a designated folder on the server (<code>static/uploads</code>).</li>
+                <li>Flask handles the backend routing and communication between the browser and AI model.</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3>🔶 2. Preprocessing and AI Prediction (CNN Model)</h3>
+            <ul>
+                <li>The uploaded image is resized (64x64 pixels) and normalized (pixel values between 0 and 1) to prepare it for model input.</li>
+                <li>This image is then passed to a pre-trained Convolutional Neural Network (CNN).</li>
+                <li>The CNN model processes the image through multiple layers:
+                    <ul>
+                        <li>Convolutional layers extract image features,</li>
+                        <li>Pooling layers reduce dimensionality,</li>
+                        <li>Fully connected layers perform classification.</li>
+                    </ul>
+                </li>
+                <li>The model then predicts the result — either:
+                    <ul>
+                        <li><strong>“Tumor Detected”</strong></li>
+                        <li><strong>“No Tumor Detected”</strong></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3>🔶 3. Patient Detail Form and Report Generation</h3>
+            <ul>
+                <li>After prediction, the user fills out a Patient Detail Form including: Name, Age, Gender, Contact, and Scan ID.</li>
+                <li>These details, along with the prediction result and MRI image, are used to generate a PDF medical report using ReportLab.</li>
+                <li>The report includes:
+                    <ul>
+                        <li>Patient Information</li>
+                        <li>Date of Scan</li>
+                        <li>AI Prediction Result</li>
+                        <li>MRI Image</li>
+                    </ul>
+                </li>
+                <li>A “Download Report” button allows users to save the report.</li>
+                <li>The system also stores patient history and report details in an SQLite database, allowing users to view or re-download old reports from the Dashboard/Archive section.</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <h3>✅ Final Outcome:</h3>
+            <ul>
+                <li>Fast and accurate tumor detection</li>
+                <li>Automatically generated professional PDF reports</li>
+                <li>Archived patient reports for future reference</li>
+                <li>Web-based and user-friendly medical diagnostic tool</li>
+            </ul>
+        </div>
+
+        <div class="footer-note">
+            Powered by Artificial Intelligence, CNN & Flask — Bringing Innovation to Healthcare.
+        </div>
+    </div>
+</body>
+</html>
